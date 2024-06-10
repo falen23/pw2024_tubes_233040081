@@ -1,6 +1,6 @@
 <?php
-
 session_start();
+
 if(isset($_POST['logout'])) {
     session_unset();
     session_destroy();
@@ -74,21 +74,20 @@ if( isset($_POST["cari"]) ) {
         </header>
         <section id="hero" style="padding-top: 50px;">
             <div class="hero-left" style="padding: 90px;">
+            <h3> Selamat Datang <?=  $_SESSION["username"] ?> </h3>
                 <h3 class="pre-title">Welcome To</he>
                 <h1 class="hero-name">DU<span>FI</span></h1>
                 <p>Tempat dimana kamu bisa mencari film-film
                 seru yang mengedukasi</p>
-                <a href="kelola.php" type="button" class="btn btn-info">Tambah</a>
+               
             </div>
-            
             <div class="hero-right" style="padding: 90px;">
-            
                 <form action="" method="POST">
                     <input type="text" name="keyword" size="30" autofocus placeholder="masukan pencarian" autocomplete="off">
                      <button type="submit" name="cari">Cari</button>
 
                 </form>
-
+            
             </div>
         </section>
         <!-- bs -->
@@ -140,13 +139,7 @@ if( isset($_POST["cari"]) ) {
                                 </div>
                                 <p><?= $dsf['isi_film']; ?></p>
         
-                                <div class="portofolio-tags">
-                                    <td>
-                                     <a href="ubah.php?id=<?= $dsf['id']; ?>" class="badge bg-warning text-decoration-none">ubah</a>
-                                      <a href="hapus.php?id=<?= $dsf['id']; ?>" onclick="return confirm('yakin?');" class="badge bg-danger text-decoration-none">hapus</a>
-                                     </td>
-                                    
-                                </div>
+                                
                               
                             </div>
                            
@@ -203,13 +196,7 @@ deskripsi_film.image_film AS img
                                 </div>
                                 <p><?= $dsf['isfi']; ?></p>
         
-                                <div class="portofolio-tags">
-                                    <td>
-                                     <a href="ubah.php?id=<?= $dsf['desk_id']; ?>" class="badge bg-warning text-decoration-none">ubah</a>
-                                      <a href="hapus.php?id=<?= $dsf['desk_id']; ?>" onclick="return confirm('yakin?');" class="badge bg-danger text-decoration-none">hapus</a>
-                                     </td>
-                                    
-                                </div>
+                               
                               
                             </div>
                            
@@ -263,13 +250,7 @@ deskripsi_film.image_film AS img
                                 </div>
                                 <p><?= $dsf['isfi']; ?></p>
         
-                                <div class="portofolio-tags">
-                                    <td>
-                                     <a href="ubah.php?id=<?= $dsf['desk_id']; ?>" class="badge bg-warning text-decoration-none">ubah</a>
-                                      <a href="hapus.php?id=<?= $dsf['desk_id']; ?>" onclick="return confirm('yakin?');" class="badge bg-danger text-decoration-none">hapus</a>
-                                     </td>
-                                    
-                                </div>
+                                
                               
                             </div>
                            
