@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(isset($_POST['logout'])) {
+if(isset($_POST['login'])) {
     session_unset();
     session_destroy();
     header('location: login.php');
@@ -38,7 +38,7 @@ if( isset($_POST["cari"]) ) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>portofolio website</title>
+    <title>Dufi</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -49,7 +49,7 @@ if( isset($_POST["cari"]) ) {
         <div class="main-container" style="position: fixed; width: 100%">
             <div class="nav" style="display: flex; justify-content: space-around; background-color:#F0F8FF;">
                 <div class="logo">
-                    <a href="">Nama Website</a>
+                    <a href="">Dufi</a>
                 </div>
 
                 <nav>
@@ -57,7 +57,7 @@ if( isset($_POST["cari"]) ) {
                         <li><a href="#hero">Home</a></li>
                         <li><a href="#portofolio">Film</a></li>
                         <form action="" method="POST">
-                            <button type="submit" name="logout">Logout</button>
+                            <button type="submit" name="login">Logout</button>
                         </form>
                        
                        
@@ -74,17 +74,18 @@ if( isset($_POST["cari"]) ) {
         </header>
         <section id="hero" style="padding-top: 50px;">
             <div class="hero-left" style="padding: 90px;">
-            <h3> Selamat Datang <?=  $_SESSION["username"] ?> </h3>
+            <!-- <h3> Selamat Datang <?=  $_SESSION["username"] ?> </h3> -->
                 <h3 class="pre-title">Welcome To</he>
                 <h1 class="hero-name">DU<span>FI</span></h1>
                 <p>Tempat dimana kamu bisa mencari film-film
                 seru yang mengedukasi</p>
-               
+                <!-- <a href="kelola.php" type="button" class="btn btn-info">Tambah</a> -->
+                </div>
             </div>
             <div class="hero-right" style="padding: 90px;">
                 <form action="" method="POST">
-                    <input type="text" name="keyword" size="30" autofocus placeholder="masukan pencarian" autocomplete="off">
-                     <button type="submit" name="cari">Cari</button>
+                    <input type="text" name="keyword" size="30" autofocus placeholder="masukan pencarian" autocomplete="off" id="keyword">
+                     <button type="submit" name="cari" id="tombol-cari">Cari</button>
 
                 </form>
             
@@ -114,7 +115,7 @@ if( isset($_POST["cari"]) ) {
             </button>
         </div>
           </div> -->
-
+    <div id="wadah">
           <section id="portofolio">
             <div class="portofolio main-container">
                 <h3 class="pre-title">Genre Aksi</h3>
@@ -128,7 +129,7 @@ if( isset($_POST["cari"]) ) {
 
                         
                             <div class="portofolio-cover">
-                                <img src="img/<?= $dsf['image_film'];?>" style="width: 400px;">
+                                <img src="img/<?= $dsf['image_film']; ?>" alt="-" style="width: 400px;">
                             </div>
         
                             <div class="portofolio-info">
@@ -151,9 +152,9 @@ if( isset($_POST["cari"]) ) {
                     
                     
                 </div>
-            </div>
+            </div>    
         </section>
-   
+     </div>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     body sementara
 </body> -->
@@ -171,8 +172,8 @@ deskripsi_film.image_film AS img
  LIMIT 3, 3
  ");
  ?>
-
-    <section id="portofolio" >
+    <div id="wadah">
+     <section id="portofolio" >
         <div class="portofolio main-container" style="margin-bottom: 30px;">
             <h3 class="pre-title">Anime</h3>
             <h1 class="section-title">Nama-Film</h1>
@@ -185,7 +186,7 @@ deskripsi_film.image_film AS img
 
                         
                             <div class="portofolio-cover">
-                                <img src="img/<?= $dsf['img'];  ?>"  style="width: 400px;">
+                                <img src="img/<?= $dsf['img']; ?>" alt="-" style="width: 400px;">
                             </div>
         
                             <div class="portofolio-info">
@@ -206,9 +207,8 @@ deskripsi_film.image_film AS img
 
             </div>
         </div>
-
-    </section>
-
+     </section>
+    </div>
 
 <?php
 $deskripsi_film3 = 
@@ -224,7 +224,7 @@ deskripsi_film.image_film AS img
  LIMIT 6, 9
  ");
  ?>
-    
+         <div id="wadah">
         <section id="portofolio" >
         <div class="portofolio main-container" style="padding-top: 30px;">
             <h3 class="pre-title">Genre Fantasi</h3>
@@ -238,8 +238,8 @@ deskripsi_film.image_film AS img
                         <div>
 
                         
-                            <div class="portofolio-cover">
-                                <img src="img/<?= $dsf['img'];  ?>" style="width: 400px;">
+                            <div class="portofolio-cover"> 
+                                <img src="img/<?= $dsf['img']; ?>" alt="-" style="width: 400px;">
                             </div>
         
                             <div class="portofolio-info">
@@ -261,9 +261,9 @@ deskripsi_film.image_film AS img
                     </div>
                 </div>
             </div>
-        </div>
+        </div>   
     </section>
-
+<div>
 
     <script src="js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

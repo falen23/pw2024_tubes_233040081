@@ -2,16 +2,12 @@
 session_start();
 require 'proses.php';
 
-if(isset($_SESSION["is_login"])) {
-    header("location: user.php");
-}
 
-if(isset($_POST["register"])) {
-
-    if( Registrasi($_POST) > 0) {
+if(isset($_POST["registrasi"])) {
+    if(Registrasi($_POST) > 0) {
 
         echo "<script>
-                alert('user berhasil ditambhakan');
+                alert('user berhasil ditambahkan');
               </script>";
     } else {
         echo mysqli_error($conn);
@@ -43,11 +39,7 @@ if(isset($_POST["register"])) {
     <input type="password" name="password" id="password">
     </li>
     <li>
-    <label for="password2">confirm password :</label>
-    <input type="password" name="password2" id="password2">
-    </li>
-    <li>
-        <button type="submit" name="register">Register</button>
+        <button type="submit" name="register2">Register</button>
     </li>
 </ul>
 

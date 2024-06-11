@@ -1,5 +1,9 @@
 <?php
-
+session_start();
+if(!isset($_SESSION['login'])) {
+  header("location: login.php");
+  exit;
+}
 // jika tombol tambah ditekan
 require 'proses.php';
 if(isset($_POST['aksi'])) {
@@ -34,15 +38,15 @@ if(isset($_POST['aksi'])) {
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>portofolio website</title>
+    <title>DUFI</title>
 </head>
 
 <body>
     <header>
         <div class="main-container" style="position: fixed; width: 100%">
-            <div class="nav mb-5">
+            <div class="nav mb-5" style="display: flex; justify-content: space-around; background-color:#F0F8FF;">
                 <div class="logo">
-                    <a href="">Nama Website</a>
+                    <a href="">Dufi</a>
                 </div>
 
     </div>

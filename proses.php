@@ -1,4 +1,6 @@
 <?php
+    $conn = mysqli_connect('localhost', 'root', '', 'pw2024_tubes_233040081');
+
     if(isset($_POST['aksi'])){
         if($_POST['aksi'] == "add"){
             echo "Tambah Data <a href='index.php'>[Home]</a>";
@@ -12,7 +14,6 @@
     }
 
     
-    $conn = mysqli_connect('localhost', 'root', '', 'pw2024_tubes_233040081');
         
     
     
@@ -162,42 +163,101 @@ function ubah($data) {
         return query($query);    
     }
 
-function registrasi($data) {
+// function login($data) {
+//     global $conn;
+
+//     $username = strtolower (stripslashes($data["username"]));
+//     $password = htmlspecialchars($data["password"]);
+//     // $password2 = mysqli_real_escape_string($conn, $data["password2"]);
+
+//     // cek username sudah ada atau belum
+//    $result = mysqli_query($conn, "SELECT  username FROM user WHERE
+//                     username = '$username'");
+
+//     if (mysqli_num_rows($result) === 1) {
+
+//         $row = mysqli_fetch_assoc($result);
+//         if(password_verify($password, $row["password"])) {
+
+//             $role = query("SELECT * role FROM user WHERE username = '$username")[0]["role"];
+//             var_dump($role);
+//             $_SESSION["login"] = true;
+//             $_SESSION["username"] = $username;
+            
+//          if ($role === "admin") {
+//             header ("location: index.php");
+//             exit;
+//          } else {
+//             header ("location: user.php");
+//             exit;
+//          }
+//         }
+//     }
+//    return [
+//     'error' => true,
+//     'pesan' => 'username / password salah'
+//    ];
+
+// }
+
+function login($data)
+{
     global $conn;
 
-    $username = strtolower (stripslashes($data["username"]));
-    $password = mysqli_real_escape_string($conn, $data["password"]);
-    $password2 = mysqli_real_escape_string($conn, $data["password2"]);
+  $username = $data["username"];
+  $password = $data["password"];
 
-    // cek username sudah ada atau belum
-   $result = mysqli_query($conn, "SELECT username FROM user WHERE
-                    username = '$username'");
-    if( mysqli_fetch_assoc($result)) {
-        echo "<script>
-                alert('username sudah terdaptar')
-              </script>";
+  $result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+
+  // cek username
+  if (mysqli_num_rows($result) === 1) {
+
+    // cek password
+    $row = mysqli_fetch_assoc($result);
+    if (password_verify($password, $row["password"])) {
+
+      // Set session
+      $_SESSION["login"] = true;
+      $_SESSION["username"] = $username;
+
+      // Remember me
+
+      $role = query("SELECT * FROM user WHERE username = '$username'")[0]["role"];
+      $_SESSION["role"] = $role;
+
+      if ($role === "admin") {
+        header("location: index.php");
+      } else {
+        header("location: user.php");
+      }
+    }
+  }
+}
+
+function registrasi($data)
+{
+
+  global $conn;
+
+
+  //tambah user baru ke DB
+  $username = ucwords($data["username"]);
+  $password = mysqli_real_escape_string($conn, $data["password"]);
+
+  $result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
+    if(mysqli_fetch_assoc($result)) {
+        echo "<script>alert('Username sudah terpakai')</script>";
         return false;
     }
 
-    // cek confirm password
-    if($password !== $password2) {
-        echo "<script>
-                alert('konfirmasi password tidak sesuai');
-             </script>";
-    return false;
-    }
-
-    // enkripsi password
     $password = password_hash($password, PASSWORD_DEFAULT);
-    
 
-    // tambah user baru ke database
-    mysqli_query($conn, "INSERT INTO user VALUES(null, '$username', '$password')");
+    $query = "INSERT INTO user (id, username, password) VALUES (null, '$username', '$password')";
+
+    mysqli_query($conn, $query);
 
     return mysqli_affected_rows($conn);
-
 }
-
 
 
 

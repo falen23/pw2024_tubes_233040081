@@ -1,10 +1,14 @@
 <?php
 
 session_start();
-if(isset($_POST['logout'])) {
-    session_unset();
-    session_destroy();
-    header('location: login.php');
+if (!isset($_SESSION["login"])) {
+    header("location: login.php");
+    exit;
+}
+
+if ($_SESSION["role"] !== "admin") {
+    header("location: user.php");
+    exit;
 }
 
 require 'proses.php';
@@ -38,7 +42,7 @@ if( isset($_POST["cari"]) ) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>portofolio website</title>
+    <title>DUFI</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -57,9 +61,10 @@ if( isset($_POST["cari"]) ) {
                         <li><a href="#hero">Home</a></li>
                         <li><a href="#portofolio">Film</a></li>
                         <form action="" method="POST">
-                            <button type="submit" name="logout">Logout</button>
-                        </form>
-                       
+                            <!-- <button type="submit" name="logout">Logout</button> -->
+                            </form>
+                            
+                            <a href="logout.php"><button>Logout</button></a>
                        
                     </ul>
                 </nav>
@@ -129,7 +134,7 @@ if( isset($_POST["cari"]) ) {
 
                         
                             <div class="portofolio-cover">
-                                <img src="img/<?= $dsf['image_film'];?>" style="width: 400px;">
+                                <img src="img/<?= $dsf['image_film'];?>" alt="-" style="width: 400px;">
                             </div>
         
                             <div class="portofolio-info">
@@ -192,7 +197,7 @@ deskripsi_film.image_film AS img
 
                         
                             <div class="portofolio-cover">
-                                <img src="img/<?= $dsf['img'];  ?>"  style="width: 400px;">
+                                <img src="img/<?= $dsf['img'];  ?>" alt="-" style="width: 400px;">
                             </div>
         
                             <div class="portofolio-info">
@@ -252,7 +257,7 @@ deskripsi_film.image_film AS img
 
                         
                             <div class="portofolio-cover">
-                                <img src="img/<?= $dsf['img'];  ?>" style="width: 400px;">
+                                <img src="img/<?= $dsf['img'];  ?>" alt="-" style="width: 400px;">
                             </div>
         
                             <div class="portofolio-info">
